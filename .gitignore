@@ -81,6 +81,7 @@ node_modules
 *.pch
 
 # Compiled Dynamic libraries
+*.so.0.1
 *.so
 *.dylib
 *.dll
