@@ -20,10 +20,10 @@ class wkhtmltoimage_global_settings;
 class Latex
 {
 public:
-	
+
 	/*! The path to the KaTeX directory. */
 	static std::string _katex_path;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief The available image formats.
@@ -31,7 +31,7 @@ public:
 	***************************************************************************/
 
 	enum class ImageFormat { PNG, SVG, JPG };
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief The types of warning behavior.
@@ -41,7 +41,7 @@ public:
 	*			 for them to be thrown as a Latex::ConversionException.
 	*
 	***************************************************************************/
-	
+
 	enum class WarningBehavior { Strict, Ignore, Log };
 
 	/***********************************************************************//*!
@@ -49,40 +49,40 @@ public:
 	*	@brief An exception thrown by the LaTeX parsing mechanism.
 	*
 	***************************************************************************/
-	
+
 	struct ParseException : public std::runtime_error
 	{
 		ParseException(const std::string& what)
 		: std::runtime_error(what)
 		{ }
 	};
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief An exception thrown during the LaTeX-to-image conversion.
 	*
 	***************************************************************************/
-	
+
 	struct ConversionException : public std::runtime_error
 	{
 		ConversionException(const std::string& what)
 		: std::runtime_error(what)
 		{ }
 	};
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief An exception thrown during file-manipulation.
 	*
 	***************************************************************************/
-	
+
 	struct FileException : public std::runtime_error
 	{
 		FileException(const std::string& what)
 		: std::runtime_error(what)
 		{ }
 	};
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief An exception signifying that Latex cannot function correctly.
@@ -91,7 +91,7 @@ public:
     *			 dependency-paths (for KaTeX) were not found on start-up.
     *
 	***************************************************************************/
-	
+
 	struct ExistentialException : public std::runtime_error
 	{
 		ExistentialException(const std::string& what)
@@ -114,7 +114,7 @@ public:
 	***************************************************************************/
 
 	Latex(WarningBehavior behavior = WarningBehavior::Log);
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Constructs a Latex instance.
@@ -127,10 +127,10 @@ public:
 	*	@see WarningBehavior
 	*
 	***************************************************************************/
-	
+
 	Latex(const std::string& stylesheet,
 		  WarningBehavior behavior = WarningBehavior::Log);
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Copy-constructs a Latex instance.
@@ -138,9 +138,9 @@ public:
 	*	@param other Another Latex instance.
 	*
 	***************************************************************************/
-	
+
 	Latex(const Latex& other);
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Move-constructs a Latex instance.
@@ -148,9 +148,9 @@ public:
 	*	@param other Another Latex instance.
 	*
 	***************************************************************************/
-	
+
 	Latex(Latex&& other) noexcept;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Assigns another Latex instance to this one.
@@ -158,9 +158,9 @@ public:
 	*	@param other Another Latex instance.
 	*
 	***************************************************************************/
-	
+
 	Latex& operator=(Latex other);
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Swaps data with another Latex instance.
@@ -168,9 +168,9 @@ public:
 	*	@param other Another Latex instance.
 	*
 	***************************************************************************/
-	
+
 	virtual void swap(Latex& other) noexcept;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Swaps the data of two Latex instances.
@@ -180,17 +180,17 @@ public:
 	*	@param second The second Latex instance.
 	*
 	***************************************************************************/
-	
+
 	friend void swap(Latex& first, Latex& second) noexcept;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Destructs the Latex instance.
 	*
 	***************************************************************************/
-	
+
 	virtual ~Latex();
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Converts a LaTeX snippet to an HTML snippet.
@@ -212,9 +212,9 @@ public:
 	*	@throws ParseException If the parsing of the latex snippet failed.
 	*
 	***************************************************************************/
-	
+
 	virtual std::string to_html(const std::string& latex) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Converts a LaTeX snippet to a complete, valid HTML document.
@@ -228,9 +228,9 @@ public:
 	*	@throws ParseException If the parsing of the latex snippet failed.
 	*
 	***************************************************************************/
-	
+
 	virtual std::string to_complete_html(const std::string& latex) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Converts a LaTeX snippet to an image.
@@ -251,11 +251,11 @@ public:
     *	@throws FileException If a temporary helper file could not be opened.
     *
 	***************************************************************************/
-	
+
 	virtual void to_image(const std::string& latex,
 					   const std::string& filepath,
 					   ImageFormat format) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Converts a LaTeX snippet to a PNG image.
@@ -274,7 +274,7 @@ public:
 	*	@throws FileException If a temporary helper file could not be opened.
 	*
 	***************************************************************************/
-	
+
 	virtual void to_png(const std::string& latex,
 					 const std::string& filepath) const;
 
@@ -296,10 +296,10 @@ public:
 	*	@throws FileException If a temporary helper file could not be opened.
 	*
 	***************************************************************************/
-	
+
 	virtual void to_jpg(const std::string& latex,
 					 const std::string& filepath) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Converts a LaTeX snippet to an SVG image.
@@ -318,10 +318,10 @@ public:
 	*	@throws FileException If a temporary helper file could not be opened.
 	*
 	***************************************************************************/
-	
+
 	virtual void to_svg(const std::string& latex,
 					 const std::string& filepath) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Adds additional CSS to the base-stylesheet.
@@ -340,23 +340,23 @@ public:
 	*	@see clear_additional_css()
 	*
 	***************************************************************************/
-	
+
 	virtual void add_css(const std::string& css);
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Returns the additional CSS added via add_css().
 	*
 	***************************************************************************/
-	
+
 	virtual const std::string& additional_css() const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Clears the additional CSS added via add_css().
 	*
 	***************************************************************************/
-	
+
 	virtual void clear_additional_css();
 
 	/***********************************************************************//*!
@@ -364,7 +364,7 @@ public:
 	*	@brief Returns the path to the stylesheet being used.
 	*
 	***************************************************************************/
-	
+
 	virtual const std::string& stylesheet() const;
 
 	/***********************************************************************//*!
@@ -377,9 +377,9 @@ public:
 	*	@param path A path to a CSS stylesheet to load.
 	*
 	***************************************************************************/
-	
+
 	virtual void stylesheet(const std::string& path);
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Returns the currently in-place warning behavior.
@@ -387,7 +387,7 @@ public:
 	*	@return The warning behavior, as a member of the WarningBehavior enum.
 	*
 	***************************************************************************/
-	
+
 	virtual	const WarningBehavior& warning_behavior() const;
 
 	/***********************************************************************//*!
@@ -398,10 +398,10 @@ public:
 	*		   			the WarningBehavior enum.
 	*
 	***************************************************************************/
-	
+
 	virtual void warning_behavior(WarningBehavior behavior);
-	
-	
+
+
 protected:
 
 	/***********************************************************************//*!
@@ -413,9 +413,9 @@ protected:
 	*	@throws ExistentialException if the KaTeX directory was not found.
 	*
 	***************************************************************************/
-	
+
 	static std::string _find_katex_path();
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief A static wrapper singleton around the V8 engine.
@@ -427,16 +427,16 @@ protected:
 	*			 principle
 	*
 	***************************************************************************/
-	
+
 	static struct V8
 	{
-	
+
 		/*******************************************************************//*!
 		*
 		*	@brief Initializes the V8 engine.
 		*
 		***********************************************************************/
-	
+
 		V8();
 
 		/*******************************************************************//*!
@@ -444,30 +444,30 @@ protected:
 		*	@brief De-initializes the V8 engine.
 		*
 		***********************************************************************/
-		
+
 		~V8();
-	
+
 		/* The static and unique platform for the V8 engine. */
 		std::unique_ptr<v8::Platform> platform;
-		
+
 	} _v8;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief An ArrayBuffer allocator subclass required by the V8 engine.
 	*
 	***************************************************************************/
-	
+
 	struct Allocator : public v8::ArrayBuffer::Allocator
 	{
 		virtual void* Allocate(size_t length) override;
-		
+
 		virtual void* AllocateUninitialized(size_t length) override;
-		
+
 		virtual void Free(void* data, size_t) override;
 	};
 
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Creates and initializes a new v8::Isolate.
@@ -480,7 +480,7 @@ protected:
 	***************************************************************************/
 
 	virtual v8::Isolate* _new_isolate() const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Loads the KaTeX JavaScript library.
@@ -492,9 +492,9 @@ protected:
 	*	@param	context A V8 context object.
 	*
 	***************************************************************************/
-	
+
 	virtual void _load_katex(const v8::Local<v8::Context>& context) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Compiles and executes JavaScript code via the V8 engine.
@@ -509,10 +509,10 @@ protected:
 	*						   which can only stem from a parse-exception.
 	*
 	***************************************************************************/
-	
+
 	virtual v8::Local<v8::Value> _run(const std::string& source,
 							  	      const v8::Local<v8::Context>& context) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Escapes the backslashes in LaTeX source for rendering.
@@ -526,9 +526,9 @@ protected:
 	*	@return The escaped LaTeX string.
 	*
 	***************************************************************************/
-	
+
 	virtual std::string _escape(std::string source) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief Requests, initializes and returns a wkhtmltoimage converter.
@@ -540,7 +540,7 @@ protected:
 	*	@return A pointer to a wkhtmltoimage_converter instance.
 	*
 	***************************************************************************/
-	
+
 	virtual wkhtmltoimage_converter*
 	_new_converter(const std::string& filepath, ImageFormat format) const;
 
@@ -555,11 +555,11 @@ protected:
 	*	@return A pointer to a wkhtmltoimage_global_settings instance.
 	*
 	***************************************************************************/
-	
+
 	virtual wkhtmltoimage_global_settings*
 	_new_converter_settings(const std::string& filepath,
 							ImageFormat format) const;
-	
+
 	/***********************************************************************//*!
 	*
 	*	@brief A callback for wkhtmltoimage that throws an exception.
@@ -567,7 +567,7 @@ protected:
 	*	@param message The error/warning message from the wkhtmltoimage engine.
 	*
 	***************************************************************************/
-	
+
 	friend void _throw(wkhtmltoimage_converter*, const char* message);
 
 	/***********************************************************************//*!
@@ -579,28 +579,28 @@ protected:
 	*	@param message The error/warning message from the wkhtmltoimage engine.
 	*
 	***************************************************************************/
-	
+
 	friend void _log(wkhtmltoimage_converter*, const char* message);
-	
+
 	/*! A instance of the Allocator struct for the V8 engine. */
 	mutable Allocator _allocator;
 
-	/*! The virtual environment in which the V8 runs. */
-	v8::Isolate* _isolate;
-	
 	/*! A persistent (i.e. non-expiring/global) handle
 	   to the context in which the instance interacts
 	   with the V8 engine. */
 	v8::UniquePersistent<v8::Context> _persistent_context;
-	
+
 	/*! The content of the base stylesheet. */
 	std::string _stylesheet;
-	
+
 	/*! The additional CSS added via add_css(). */
 	std::string _additional_css;
-	
+
 	/*! The current WarningBehavior configuration. */
 	WarningBehavior _warning_behaviour;
+	
+	/*! The virtual environment in which the V8 runs. */
+	v8::Isolate* _isolate;
 };
 
 #endif /* LATEX_HPP */

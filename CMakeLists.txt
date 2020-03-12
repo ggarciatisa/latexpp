@@ -1,6 +1,5 @@
 # Guillermo Garcia Bunster. Copyright (C) 2020. GPLv3
 
-
 #
 # Project Properties
 #
@@ -19,6 +18,9 @@ set (APPLICATION_VENDOR_NAME "Tecnologia Integral S.A.")
 set (APPLICATION_VENDOR_URL "tecintegral.cl")
 set (APPLICATION_ID "${APPLICATION_VENDOR_ID}.${PROJECT_NAME}")
 
+# Include cmake modules from ./cmake
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
 #
 # Debugging Options
 #
@@ -33,10 +35,10 @@ endif()
 # Project Output Paths
 #
 set (MAINFOLDER ${PROJECT_SOURCE_DIR})
+# set (EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/bin")
 set (EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/bin")
 set (LIBRARY_OUTPUT_PATH "${MAINFOLDER}/lib")
 set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall")
-
 
 add_definitions(-DRSRC_PATH="${RESOURCES_PATH}")
 #
@@ -51,10 +53,10 @@ include_directories("${MAINFOLDER}/include")
 add_subdirectory(src)
 
 # TODO: Add CMakeList.txt to examples
-# add_subdirectory(examples/sample)
-# add_subdirectory(examples/image)
+add_subdirectory(examples/sample)
+add_subdirectory(examples/sample_html)
+add_subdirectory(examples/sample_image)
 # add_subdirectory(examples/style)
-# add_subdirectory(examples/html)
 
 #
 # Add Install Targets

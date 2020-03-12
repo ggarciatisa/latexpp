@@ -1,4 +1,4 @@
-#include "../../latex.hpp"
+#include "latex.hpp"
 
 #include <fstream>
 #include <iostream>
